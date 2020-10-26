@@ -490,10 +490,10 @@ def detection_targets_graph(proposals, gt_boxes, gt_masks, config):
     # Subsample ROIs. Aim for 33% positive
     # Positive ROIs
     positive_count = int(config.TRAIN_ROIS_PER_IMAGE * config.ROI_POSITIVE_RATIO)
-    positive_indices = tf.random.shuffle(positive_indices)[:positive_count]
+    positive_indices = tf.random_shuffle(positive_indices)[:positive_count]
     # Negative ROIs. Fill the rest of the batch.
     negative_count = config.TRAIN_ROIS_PER_IMAGE - tf.shape(positive_indices)[0]
-    negative_indices = tf.random.shuffle(negative_indices)[:negative_count]
+    negative_indices = tf.random_shuffle(negative_indices)[:negative_count]
     # Gather selected ROIs
     positive_rois = tf.gather(proposals, positive_indices)
     negative_rois = tf.gather(proposals, negative_indices)
